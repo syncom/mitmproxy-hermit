@@ -85,9 +85,25 @@ Hermit binary.
 
    ```bash
    project🐚  hermit update
-   project🐚  hermit version # Should see "testversion (canary)"
+   project🐚  hermit version # Should be "testversion (canary)"
    project🐚  hermit validate env .
-   project🐚  echo $? # Should see 0
+   project🐚  echo $? # Should be 0
+   project🐚  deactivate-hermit
+   # More testing with the custom Hermit
+   mkdir ../project1
+   hermit version # Should be "testversion (canary)"
+   hermit init .
+   . bin/activate-hermit
+   project1🐚  hermit version # Should be "testversion (canary)"
+   project1🐚  hermit validate env .
+   project1🐚  echo $? # Should be 0
+   # Clear cache and try custom Hermit again
+   project1🐚  deactivate-hermit
+   rm -rf ~/.cache/hermit
+   . bin/activate-hermit
+   project1🐚  hermit version # Should be "testversion (canary)"
+   project1🐚  hermit validate env .
+   project1🐚  echo $? # Should be 0
    ```
 
 Remember to revert your proxy configuration in Docker Desktop after
